@@ -21,7 +21,7 @@ docker build -t spring-portfolio-manager .
 docker run -d -p 8080:8080 --name spring-portfolio-manager-container spring-portfolio-manager
 ```
 
-http://localhost:8080/patients
+http://localhost:8080/api/assets
 
 ```bash
 docker stop spring-portfolio-manager-container
