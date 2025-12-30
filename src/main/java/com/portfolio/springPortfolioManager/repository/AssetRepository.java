@@ -44,9 +44,16 @@ public class AssetRepository {
     }
 
     public void report() {
-        assets.forEach(asset -> {
-            System.out.printf(asset.name(), asset.purchaseDate(), asset.purchaseValue(), asset.profit());
-        });
+        assets.forEach(asset -> System.out.printf(
+                "%s | %s | %s | %.2f %s | %.2f %s%n",
+                asset.type().getDisplayName(),
+                asset.name(),
+                asset.purchaseDate(),
+                asset.purchaseValue().amount(),
+                asset.purchaseValue().currency(),
+                asset.profit().amount(),
+                asset.profit().currency()
+        ));
     }
 
     public void showAssets() {
