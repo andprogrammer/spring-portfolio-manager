@@ -1,16 +1,14 @@
-package com.portfolio.springPortfolioManager.model;
+package com.portfolio.springPortfolioManager.model.asset;
 
-import com.portfolio.springPortfolioManager.model.impl.AssetType;
-import com.portfolio.springPortfolioManager.model.impl.ValuableAsset;
-import com.portfolio.springPortfolioManager.model.monetaryUnit.MonetaryUnit;
+import com.portfolio.springPortfolioManager.model.asset.impl.AssetType;
+import com.portfolio.springPortfolioManager.model.asset.impl.ValuableAsset;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public record SavingsAccount(String name,
                              String bankName,
-                             double purchaseValue,
-                             MonetaryUnit currency,
+                             Money purchaseValue,
                              LocalDate purchaseDate,
                              double annualInterestRate
 ) implements ValuableAsset {
@@ -21,9 +19,10 @@ public record SavingsAccount(String name,
     }
 
     @Override
-    public double currentValue() {
+    public Money currentValue() {
         long days = ChronoUnit.DAYS.between(purchaseDate, LocalDate.now());
         double years = days / 365.0;
-        return purchaseValue * (1 + (annualInterestRate / 100) * years);
+        double result = purchaseValue.amount() * (1 + (annualInterestRate / 100) * years);
+        return new Money(result, purchaseValue.currency());
     }
 }

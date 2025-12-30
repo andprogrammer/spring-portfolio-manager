@@ -1,4 +1,4 @@
-package com.portfolio.springPortfolioManager.model.impl;
+package com.portfolio.springPortfolioManager.model.asset.impl;
 
 public enum AssetType {
 

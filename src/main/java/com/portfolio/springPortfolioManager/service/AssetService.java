@@ -1,6 +1,6 @@
 package com.portfolio.springPortfolioManager.service;
 
-import com.portfolio.springPortfolioManager.model.impl.Asset;
+import com.portfolio.springPortfolioManager.model.asset.impl.Asset;
 import com.portfolio.springPortfolioManager.repository.AssetRepository;
 import org.springframework.stereotype.Service;
 

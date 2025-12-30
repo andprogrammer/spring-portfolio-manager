@@ -1,10 +1,14 @@
 package com.portfolio.springPortfolioManager.repository;
 
-import com.portfolio.springPortfolioManager.model.impl.Asset;
+import com.portfolio.springPortfolioManager.model.asset.Money;
+import com.portfolio.springPortfolioManager.model.asset.impl.Asset;
+import com.portfolio.springPortfolioManager.model.asset.monetaryUnit.MonetaryUnit;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class AssetRepository {
@@ -17,16 +21,22 @@ public class AssetRepository {
         }
     }
 
-    public double totalPurchaseValue() {
+    public Map<MonetaryUnit, Double> totalPurchaseValueByCurrency() {
         return assets.stream()
-                .mapToDouble(Asset::purchaseValue)
-                .sum();
+                .map(Asset::purchaseValue)
+                .collect(Collectors.groupingBy(
+                        Money::currency,
+                        Collectors.summingDouble(Money::amount)
+                ));
     }
 
-    public double totalProfit() {
+    public Map<MonetaryUnit, Double> totalProfitByCurrency() {
         return assets.stream()
-                .mapToDouble(Asset::profit)// ToDo distinguish currency PLN EURO USD...
-                .sum();
+                .map(Asset::profit)
+                .collect(Collectors.groupingBy(
+                        Money::currency,
+                        Collectors.summingDouble(Money::amount)
+                ));
     }
 
     public List<Asset> findAll() {
