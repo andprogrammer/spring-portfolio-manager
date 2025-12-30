@@ -1,4 +1,4 @@
-package com.portfolio.springPortfolioManager.model.monetaryUnit;
+package com.portfolio.springPortfolioManager.model.asset.monetaryUnit;
 
 public enum Currency implements MonetaryUnit {
 

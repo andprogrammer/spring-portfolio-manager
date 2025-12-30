@@ -1,8 +1,8 @@
-package com.portfolio.springPortfolioManager.model;
+package com.portfolio.springPortfolioManager.model.asset;
 
-import com.portfolio.springPortfolioManager.model.impl.Asset;
-import com.portfolio.springPortfolioManager.model.impl.AssetType;
-import com.portfolio.springPortfolioManager.model.monetaryUnit.MonetaryUnit;
+import com.portfolio.springPortfolioManager.model.asset.impl.Asset;
+import com.portfolio.springPortfolioManager.model.asset.impl.AssetType;
+import com.portfolio.springPortfolioManager.model.asset.monetaryUnit.MonetaryUnit;
 
 import java.time.LocalDate;
 
@@ -24,7 +24,7 @@ public record Crypto(MonetaryUnit cryptoCurrency,
     }
 
     @Override
-    public double purchaseValue() {
-        return quantity * pricePerUnit;
+    public Money purchaseValue() {
+        return new Money(quantity * pricePerUnit, currency);
     }
 }

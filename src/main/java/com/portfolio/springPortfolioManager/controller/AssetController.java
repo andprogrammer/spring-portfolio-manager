@@ -1,6 +1,6 @@
 package com.portfolio.springPortfolioManager.controller;
 
-import com.portfolio.springPortfolioManager.model.impl.Asset;
+import com.portfolio.springPortfolioManager.model.asset.impl.Asset;
 import com.portfolio.springPortfolioManager.service.AssetService;
 import org.springframework.web.bind.annotation.*;
 
