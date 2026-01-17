@@ -1,6 +1,7 @@
 package com.portfolio.asset.model;
 
 import com.portfolio.asset.core.Money;
+import com.portfolio.asset.model.builders.BondBuilder;
 import com.portfolio.asset.unit.Currency;
 import org.junit.jupiter.api.Test;
 
@@ -13,13 +14,13 @@ class BondTest {
 
     @Test
     void shouldCalculateCurrentValue() {
-        Bond bond = new Bond(
-                "Bond",
-                new Money(10_000, Currency.PLN),
-                LocalDate.of(2024, 1, 1),
-                5,
-                24
-        );
+        Bond bond = new BondBuilder()
+                .withName("Bond")
+                .withPurchaseValue(new Money(10_000, Currency.PLN))
+                .withAnnualInterestRate(5)
+                .withDurationMonths(24)
+                .withPurchaseDate(LocalDate.of(2024, 1, 1))
+                .build();
 
         Money value = bond.currentValue();
 
@@ -28,26 +29,22 @@ class BondTest {
 
     @Test
     void shouldReturnCorrectMaturityDate() {
-        Bond bond = new Bond(
-                "Bond",
-                new Money(1_000, Currency.PLN),
-                LocalDate.of(2024, 1, 1),
-                5,
-                12
-        );
+        Bond bond = new BondBuilder()
+                .withName("Bond")
+                .withPurchaseDate(LocalDate.of(2024, 1, 1))
+                .withDurationMonths(12)
+                .build();
 
         assertEquals(LocalDate.of(2025, 1, 1), bond.maturityDate());
     }
 
     @Test
     void shouldDetectMaturedBond() {
-        Bond bond = new Bond(
-                "Bond",
-                new Money(1_000, Currency.PLN),
-                LocalDate.now().minusMonths(13),
-                5,
-                12
-        );
+        Bond bond = new BondBuilder()
+                .withName("Bond")
+                .withPurchaseDate(LocalDate.now().minusMonths(13))
+                .withDurationMonths(12)
+                .build();
 
         assertTrue(bond.isMatured());
     }

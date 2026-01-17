@@ -25,7 +25,6 @@ public record Bond(String name,
         return new Money(calculation, purchaseValue.currency());
     }
 
-
     public LocalDate maturityDate() {
         return purchaseDate.plusMonths(durationMonths);
     }
